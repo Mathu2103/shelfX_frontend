@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Facebook, Twitter, Instagram, Mail } from "lucide-react";
+import { Facebook, Twitter, Instagram, Mail } from "lucide-react";
+import logo from "@/assets/images/logo.png";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -11,8 +12,8 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <BookOpen className="h-8 w-8 text-accent" />
-              <span className="font-serif text-2xl font-semibold">Bookshire</span>
+              <img src={logo} alt="shelfX Logo" className="h-40 w-auto" />
+              <span className="font-serif text-3xl font-semibold">shelfX</span>
             </Link>
             <p className="text-sm opacity-80">
               Your destination for literary adventures. Discover, explore, and find your next favorite read.
@@ -74,7 +75,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm opacity-60">
-          <p>© 2024 Bookshire. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} shelfX. All rights reserved.</p>
         </div>
       </div>
     </footer>
