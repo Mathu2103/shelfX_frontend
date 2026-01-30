@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
@@ -6,9 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/contexts/CartContext";
 import { getAuthorById } from "@/data/mockData";
+import { useState } from "react";
+import axios from "axios";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { items, updateQuantity, removeFromCart, totalItems, totalPrice, clearCart } = useCart();
+  const [promoCode, setPromoCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [promoStatus, setPromoStatus] = useState("");
+  const [loadingPromo, setLoadingPromo] = useState(false);
 
   if (items.length === 0) {
     return (
@@ -39,7 +46,8 @@ const Cart = () => {
   }
 
   const shipping = totalPrice >= 35 ? 0 : 4.99;
-  const grandTotal = totalPrice + shipping;
+  const discountAmount = discount > 0 ? (totalPrice * discount) / 100 : 0;
+  const grandTotal = totalPrice - discountAmount + shipping;
 
   return (
     <Layout>
@@ -162,6 +170,12 @@ const Cart = () => {
                     <span>Total</span>
                     <span className="font-serif">${grandTotal.toFixed(2)}</span>
                   </div>
+                  {discount > 0 && (
+                    <div className="flex justify-between text-xs text-green-600 mt-1">
+                      <span>Promo Discount</span>
+                      <span>- ${discountAmount.toFixed(2)}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -169,14 +183,50 @@ const Cart = () => {
               <div className="mt-6">
                 <label className="text-sm font-medium mb-2 block">Promo Code</label>
                 <div className="flex gap-2">
-                  <Input placeholder="Enter code" className="flex-1" />
-                  <Button variant="secondary">Apply</Button>
+                  <Input
+                    placeholder="Enter code"
+                    className="flex-1"
+                    value={promoCode}
+                    onChange={e => setPromoCode(e.target.value)}
+                    disabled={loadingPromo}
+                  />
+                  <Button
+                    variant="secondary"
+                    disabled={loadingPromo || !promoCode}
+                    onClick={async () => {
+                      setLoadingPromo(true);
+                      setPromoStatus("");
+                      try {
+                        const res = await axios.post("/api/validate-promo", { code: promoCode });
+                        if (res.data.valid) {
+                          setDiscount(res.data.discount);
+                          setPromoStatus(`Promo applied: ${res.data.discount}% off!`);
+                        } else {
+                          setDiscount(0);
+                          setPromoStatus("Invalid promo code.");
+                        }
+                      } catch (err) {
+                        console.error("Promo code validation error:", err);
+                        setPromoStatus("Error validating promo code.");
+                      }
+                      setLoadingPromo(false);
+                    }}
+                  >
+                    {loadingPromo ? "Applying..." : "Apply"}
+                  </Button>
                 </div>
+                {promoStatus && (
+                  <p className={`mt-2 text-sm ${discount > 0 ? "text-green-600" : "text-red-600"}`}>{promoStatus}</p>
+                )}
+                {discount > 0 && (
+                  <p className="mt-1 text-xs text-muted-foreground">You saved ${discountAmount.toFixed(2)}!</p>
+                )}
               </div>
 
               <Button
                 size="lg"
                 className="w-full mt-6 bg-accent text-accent-foreground hover:bg-accent/90"
+                onClick={() => navigate("/checkout")}
               >
                 Proceed to Checkout
                 <ArrowRight className="ml-2 h-4 w-4" />

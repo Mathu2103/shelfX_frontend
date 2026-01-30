@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, BookOpen } from "lucide-react";
 import Layout from "@/components/layout/Layout";
@@ -7,10 +7,62 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const endpoint = isLogin ? "/api/login" : "/api/register";
+      const payload = isLogin 
+        ? { email: formData.email, password: formData.password }
+        : formData;
+
+      const response = await axios.post(endpoint, payload);
+
+      if (response.data.success) {
+        // Store token and user info in localStorage
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        
+        // Redirect to home page
+        navigate("/");
+      }
+    } catch (err: any) {
+      console.error("Auth error:", err);
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else if (err.response?.data?.errors) {
+        const errors = Object.values(err.response.data.errors).flat();
+        setError(errors.join(", "));
+      } else {
+        setError(isLogin ? "Login failed. Please try again." : "Registration failed. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Layout>
@@ -38,17 +90,38 @@ const Login = () => {
             </div>
 
             {/* Form */}
-            <form className="space-y-4">
+            {error && (
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 mb-4">
+                <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-4">
               {!isLogin && (
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
-                  <Input id="name" placeholder="John Doe" />
+                  <Input 
+                    id="name" 
+                    name="name"
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required={!isLogin}
+                  />
                 </div>
               )}
 
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="you@example.com" />
+                <Input 
+                  id="email" 
+                  name="email"
+                  type="email" 
+                  placeholder="you@example.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="space-y-2">
@@ -56,8 +129,13 @@ const Login = () => {
                 <div className="relative">
                   <Input
                     id="password"
+                    name="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    required
+                    minLength={6}
                   />
                   <button
                     type="button"
@@ -68,6 +146,22 @@ const Login = () => {
                   </button>
                 </div>
               </div>
+
+              {!isLogin && (
+                <div className="space-y-2">
+                  <Label htmlFor="password_confirmation">Confirm Password</Label>
+                  <Input
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    type="password"
+                    placeholder="••••••••"
+                    value={formData.password_confirmation}
+                    onChange={handleInputChange}
+                    required={!isLogin}
+                    minLength={6}
+                  />
+                </div>
+              )}
 
               {isLogin && (
                 <div className="flex items-center justify-between">
@@ -101,8 +195,9 @@ const Login = () => {
                 type="submit"
                 className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
                 size="lg"
+                disabled={loading}
               >
-                {isLogin ? "Sign In" : "Create Account"}
+                {loading ? "Please wait..." : isLogin ? "Sign In" : "Create Account"}
               </Button>
             </form>
 

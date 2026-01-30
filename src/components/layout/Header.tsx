@@ -25,13 +25,13 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
-      <div className="container flex h-36 items-center justify-between gap-4">
+      <div className="container flex h-24 items-center justify-between gap-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <img
             src={logo}
             alt="shelfX Logo"
-            className="h-32 w-auto transition-transform group-hover:scale-105"
+            className="h-20 w-auto transition-transform group-hover:scale-105"
           />
           <span className="font-serif text-2xl font-semibold text-primary">
             shelfX
