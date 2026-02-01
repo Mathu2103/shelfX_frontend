@@ -1,0 +1,9 @@
+export { default as DashboardWelcome } from './DashboardWelcome';
+export { default as DashboardStats } from './DashboardStats';
+export { default as DashboardRecommended } from './DashboardRecommended';
+export { default as DashboardTrending } from './DashboardTrending';
+export { default as DashboardRecentlyViewed } from './DashboardRecentlyViewed';
+export { default as DashboardWishlistPreview } from './DashboardWishlistPreview';
+export { default as DashboardAlerts } from './DashboardAlerts';
+export { default as DashboardBundles } from './DashboardBundles';
+export { default as DashboardQuickNav } from './DashboardQuickNav';

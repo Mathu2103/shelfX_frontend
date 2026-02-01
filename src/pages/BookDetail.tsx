@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Heart, ShoppingCart, Star, Truck, Shield, ArrowLeft, Share2, Minus, Plus } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import BookGrid from "@/components/books/BookGrid";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ import {
 } from "@/data/mockData";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
+import { useRecentlyViewed } from "@/contexts/RecentlyViewedContext";
 import { cn } from "@/lib/utils";
 
 const BookDetail = () => {
@@ -27,6 +28,14 @@ const BookDetail = () => {
   
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const { addToRecentlyViewed } = useRecentlyViewed();
+
+  // Track this book as recently viewed
+  useEffect(() => {
+    if (book) {
+      addToRecentlyViewed(book);
+    }
+  }, [book?.id]);
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
   if (!book) {
