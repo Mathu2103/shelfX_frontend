@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import Authors from "./pages/Authors";
 import Bundles from "./pages/Bundles";
 import AdminDashboard from "./pages/AdminDashboard";
+import UserDashboard from "./pages/UserDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
               <Route path="/authors" element={<Authors />} />
               <Route path="/bundles" element={<Bundles />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/dashboard" element={<UserDashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
