@@ -67,6 +67,9 @@ const Header = () => {
           <Link to="/bundles" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Bundles
           </Link>
+          <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            My Dashboard
+          </Link>
         </nav>
 
         {/* Search Bar */}
@@ -136,6 +139,7 @@ const Header = () => {
                   <Link to="/books" className="px-4 py-2 hover:bg-muted rounded-md">All Books</Link>
                   <Link to="/authors" className="px-4 py-2 hover:bg-muted rounded-md">Authors</Link>
                   <Link to="/bundles" className="px-4 py-2 hover:bg-muted rounded-md">Bundles</Link>
+                  <Link to="/dashboard" className="px-4 py-2 hover:bg-muted rounded-md">My Dashboard</Link>
                   <Link to="/login" className="px-4 py-2 hover:bg-muted rounded-md">Sign In</Link>
                 </nav>
                 <div className="border-t pt-4">
