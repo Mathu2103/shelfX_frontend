@@ -44,90 +44,95 @@ const BookCard = ({ book, index = 0 }: BookCardProps) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      transition={{ duration: 0.4, delay: Math.min(index, 8) * 0.05 }}
     >
       <Link to={`/book/${book.id}`} className="group block">
-        <div className="relative rounded-lg overflow-hidden bg-card shadow-book hover:shadow-book-hover transition-all duration-300">
+        <div className="relative rounded-xl overflow-hidden bg-card border border-border/60 shadow-card hover:shadow-book-hover hover:-translate-y-1 transition-all duration-300">
           {/* Image Container */}
-          <div className="relative aspect-[2/3] overflow-hidden bg-muted">
+          <div className="relative aspect-[3/4] overflow-hidden bg-muted/40 p-6 flex items-center justify-center">
             <img
               src={book.cover}
               alt={book.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="max-w-full max-h-full object-contain drop-shadow-md transition-transform duration-500 group-hover:scale-105"
             />
-            
-            {/* Overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            
-            {/* Quick Actions */}
-            <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+
+            {/* Discount badge - top right, pill */}
+            {hasDiscount && (
+              <span className="absolute top-3 right-3 bg-accent text-accent-foreground text-[11px] font-semibold px-2.5 py-1 rounded-full tracking-wide">
+                -{discountPercent}%
+              </span>
+            )}
+
+            {/* Stock badge - top left when not in stock */}
+            {stockStatus.color !== "success" && (
+              <Badge
+                variant={stockStatus.color === "destructive" ? "destructive" : "secondary"}
+                className="absolute top-3 left-3 text-[10px] uppercase tracking-wider"
+              >
+                {stockStatus.label}
+              </Badge>
+            )}
+
+            {/* Wishlist - subtle, top right (when no discount) or just below */}
+            <button
+              onClick={handleWishlistClick}
+              aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
+              className={cn(
+                "absolute h-9 w-9 rounded-full bg-card/90 backdrop-blur border border-border/60 flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/40 opacity-0 group-hover:opacity-100 transition-all duration-300",
+                hasDiscount ? "top-12 right-3" : "top-3 right-3",
+                inWishlist && "opacity-100 text-accent border-accent/40"
+              )}
+            >
+              <Heart className={cn("h-4 w-4", inWishlist && "fill-current")} />
+            </button>
+
+            {/* Quick add to cart - slides up on hover */}
+            <div className="absolute bottom-3 left-3 right-3 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
               <Button
                 size="sm"
-                className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90"
+                className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md font-medium"
                 onClick={handleAddToCart}
                 disabled={book.stock === 0}
               >
                 <ShoppingCart className="h-4 w-4 mr-2" />
                 {book.stock === 0 ? "Out of Stock" : "Add to Cart"}
               </Button>
-              <Button
-                size="icon"
-                variant="secondary"
-                className={cn(
-                  "shrink-0",
-                  inWishlist && "bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                )}
-                onClick={handleWishlistClick}
-              >
-                <Heart className={cn("h-4 w-4", inWishlist && "fill-current")} />
-              </Button>
-            </div>
-
-            {/* Badges */}
-            <div className="absolute top-3 left-3 flex flex-col gap-2">
-              {hasDiscount && (
-                <Badge className="bg-destructive text-destructive-foreground">
-                  -{discountPercent}%
-                </Badge>
-              )}
-              {stockStatus.color !== "success" && (
-                <Badge variant={stockStatus.color === "destructive" ? "destructive" : "secondary"}>
-                  {stockStatus.label}
-                </Badge>
-              )}
             </div>
           </div>
 
           {/* Content */}
-          <div className="p-4">
-            <h3 className="font-serif text-lg font-semibold line-clamp-1 group-hover:text-accent transition-colors">
-              {book.title}
-            </h3>
-            <p className="text-sm text-muted-foreground mt-1">
-              {author?.name}
-            </p>
-            
-            {/* Rating */}
-            <div className="flex items-center gap-1 mt-2">
-              <Star className="h-4 w-4 fill-accent text-accent" />
-              <span className="text-sm font-medium">{book.rating}</span>
-              <span className="text-xs text-muted-foreground">
-                ({book.reviewCount.toLocaleString()})
-              </span>
+          <div className="px-5 pt-4 pb-5 border-t border-border/60">
+            <div className="flex items-start justify-between gap-3">
+              <h3 className="font-serif text-base font-semibold line-clamp-1 text-foreground group-hover:text-accent transition-colors">
+                {book.title}
+              </h3>
+              <div className="flex items-baseline gap-1.5 shrink-0">
+                <span className="font-sans text-base font-semibold text-accent">
+                  ${book.price.toFixed(2)}
+                </span>
+              </div>
             </div>
 
-            {/* Price */}
-            <div className="flex items-center gap-2 mt-3">
-              <span className="font-serif text-xl font-bold text-foreground">
-                ${book.price.toFixed(2)}
-              </span>
+            <div className="mt-1 flex items-center justify-between gap-2">
+              <p className="text-sm text-muted-foreground line-clamp-1">
+                {author?.name}
+              </p>
               {hasDiscount && (
-                <span className="text-sm text-muted-foreground line-through">
+                <span className="text-xs text-muted-foreground line-through">
                   ${book.originalPrice?.toFixed(2)}
                 </span>
               )}
+            </div>
+
+            {/* Rating */}
+            <div className="flex items-center gap-1 mt-2.5">
+              <Star className="h-3.5 w-3.5 fill-accent text-accent" />
+              <span className="text-xs font-medium text-foreground">{book.rating}</span>
+              <span className="text-xs text-muted-foreground">
+                ({book.reviewCount.toLocaleString()})
+              </span>
             </div>
           </div>
         </div>

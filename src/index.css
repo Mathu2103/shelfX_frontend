@@ -10,115 +10,115 @@
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
 
-/* Bookshop Design System - Warm, Literary, Sophisticated */
+/* Bookshire Design System - Minimal, Premium, Editorial Bookstore */
 
 @layer base {
   :root {
-    /* Primary - Rich Espresso Brown */
-    --primary: 24 30% 22%;
-    --primary-foreground: 40 30% 96%;
+    /* Primary - Deep ink for typography & dark surfaces */
+    --primary: 160 25% 12%;
+    --primary-foreground: 40 30% 98%;
 
-    /* Background - Warm Ivory/Cream */
-    --background: 40 30% 96%;
-    --foreground: 24 30% 15%;
+    /* Background - Clean off-white */
+    --background: 40 20% 98%;
+    --foreground: 160 15% 12%;
 
-    /* Cards - Soft cream with warmth */
-    --card: 40 25% 98%;
-    --card-foreground: 24 30% 15%;
+    /* Cards - Pure white with crisp edges */
+    --card: 0 0% 100%;
+    --card-foreground: 160 15% 12%;
 
     /* Popover */
-    --popover: 40 25% 98%;
-    --popover-foreground: 24 30% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 15% 12%;
 
-    /* Secondary - Forest Green */
-    --secondary: 150 25% 30%;
-    --secondary-foreground: 40 30% 96%;
+    /* Secondary - Soft neutral */
+    --secondary: 40 15% 94%;
+    --secondary-foreground: 160 25% 12%;
 
-    /* Muted - Warm gray */
-    --muted: 30 15% 90%;
-    --muted-foreground: 24 15% 45%;
+    /* Muted - Light warm gray */
+    --muted: 40 15% 95%;
+    --muted-foreground: 160 8% 42%;
 
-    /* Accent - Golden */
-    --accent: 38 90% 50%;
-    --accent-foreground: 24 30% 15%;
+    /* Accent - Premium emerald green (reference-matched) */
+    --accent: 160 60% 38%;
+    --accent-foreground: 0 0% 100%;
 
     /* Destructive */
     --destructive: 0 72% 51%;
-    --destructive-foreground: 40 30% 96%;
+    --destructive-foreground: 40 30% 98%;
 
-    /* Success - for in-stock */
-    --success: 142 70% 35%;
-    --success-foreground: 40 30% 96%;
+    /* Success - in stock */
+    --success: 160 60% 38%;
+    --success-foreground: 0 0% 100%;
 
-    /* Warning - for low stock */
+    /* Warning - low stock */
     --warning: 38 92% 50%;
     --warning-foreground: 24 30% 15%;
 
-    /* Borders & Inputs */
-    --border: 30 20% 85%;
-    --input: 30 20% 85%;
-    --ring: 38 90% 50%;
+    /* Borders & Inputs - Subtle, refined */
+    --border: 40 15% 90%;
+    --input: 40 15% 90%;
+    --ring: 160 60% 38%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     /* Sidebar */
-    --sidebar-background: 24 30% 18%;
-    --sidebar-foreground: 40 30% 92%;
-    --sidebar-primary: 38 90% 50%;
-    --sidebar-primary-foreground: 24 30% 15%;
-    --sidebar-accent: 24 25% 25%;
-    --sidebar-accent-foreground: 40 30% 92%;
-    --sidebar-border: 24 20% 25%;
-    --sidebar-ring: 38 90% 50%;
+    --sidebar-background: 160 25% 12%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 160 60% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 20% 18%;
+    --sidebar-accent-foreground: 40 20% 95%;
+    --sidebar-border: 160 15% 20%;
+    --sidebar-ring: 160 60% 38%;
 
     /* Custom Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(24 30% 18% / 0.9), hsl(24 30% 25% / 0.7));
-    --gradient-gold: linear-gradient(135deg, hsl(38 90% 50%), hsl(45 90% 55%));
-    --gradient-card-hover: linear-gradient(180deg, hsl(40 30% 98%), hsl(38 50% 95%));
+    --gradient-hero: linear-gradient(135deg, hsl(40 20% 98% / 0.4), hsl(40 20% 96% / 0.85));
+    --gradient-gold: linear-gradient(135deg, hsl(160 60% 38%), hsl(160 55% 48%));
+    --gradient-card-hover: linear-gradient(180deg, hsl(0 0% 100%), hsl(40 15% 97%));
 
-    /* Shadows */
-    --shadow-book: 0 4px 20px -4px hsl(24 30% 15% / 0.15);
-    --shadow-book-hover: 0 12px 40px -8px hsl(24 30% 15% / 0.25);
-    --shadow-card: 0 2px 8px -2px hsl(24 30% 15% / 0.08);
+    /* Shadows - Soft, premium depth */
+    --shadow-book: 0 1px 3px hsl(160 25% 12% / 0.04), 0 4px 16px -4px hsl(160 25% 12% / 0.08);
+    --shadow-book-hover: 0 8px 32px -8px hsl(160 25% 12% / 0.18);
+    --shadow-card: 0 1px 2px hsl(160 25% 12% / 0.03), 0 2px 8px -2px hsl(160 25% 12% / 0.06);
   }
 
   .dark {
-    --primary: 38 90% 50%;
-    --primary-foreground: 24 30% 10%;
+    --primary: 160 60% 45%;
+    --primary-foreground: 160 25% 8%;
 
-    --background: 24 30% 8%;
-    --foreground: 40 25% 92%;
+    --background: 160 25% 8%;
+    --foreground: 40 20% 95%;
 
-    --card: 24 28% 12%;
-    --card-foreground: 40 25% 92%;
+    --card: 160 22% 11%;
+    --card-foreground: 40 20% 95%;
 
-    --popover: 24 28% 12%;
-    --popover-foreground: 40 25% 92%;
+    --popover: 160 22% 11%;
+    --popover-foreground: 40 20% 95%;
 
-    --secondary: 150 20% 25%;
-    --secondary-foreground: 40 30% 96%;
+    --secondary: 160 15% 18%;
+    --secondary-foreground: 40 20% 95%;
 
-    --muted: 24 20% 18%;
-    --muted-foreground: 30 15% 60%;
+    --muted: 160 15% 16%;
+    --muted-foreground: 40 10% 65%;
 
-    --accent: 38 85% 55%;
-    --accent-foreground: 24 30% 10%;
+    --accent: 160 55% 48%;
+    --accent-foreground: 160 25% 8%;
 
     --destructive: 0 62% 45%;
-    --destructive-foreground: 40 30% 96%;
+    --destructive-foreground: 40 20% 95%;
 
-    --border: 24 20% 20%;
-    --input: 24 20% 20%;
-    --ring: 38 90% 50%;
+    --border: 160 15% 20%;
+    --input: 160 15% 20%;
+    --ring: 160 60% 45%;
 
-    --sidebar-background: 24 30% 6%;
-    --sidebar-foreground: 40 30% 92%;
-    --sidebar-primary: 38 90% 50%;
-    --sidebar-primary-foreground: 24 30% 10%;
-    --sidebar-accent: 24 25% 15%;
-    --sidebar-accent-foreground: 40 30% 92%;
-    --sidebar-border: 24 20% 15%;
-    --sidebar-ring: 38 90% 50%;
+    --sidebar-background: 160 25% 6%;
+    --sidebar-foreground: 40 20% 92%;
+    --sidebar-primary: 160 60% 45%;
+    --sidebar-primary-foreground: 160 25% 8%;
+    --sidebar-accent: 160 20% 14%;
+    --sidebar-accent-foreground: 40 20% 92%;
+    --sidebar-border: 160 15% 16%;
+    --sidebar-ring: 160 60% 45%;
   }
 }
 
@@ -129,11 +129,17 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-serif tracking-tight;
   }
+
+  h1 { @apply leading-[1.1]; }
+  h2 { @apply leading-[1.15]; }
+
+  p { @apply leading-relaxed; }
 }
 
 @layer utilities {
@@ -148,6 +154,10 @@
 
   .shadow-book-hover {
     box-shadow: var(--shadow-book-hover);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
   }
 
   .bg-hero-gradient {
