@@ -105,11 +105,11 @@ const BookCard = ({ book, index = 0 }: BookCardProps) => {
           {/* Content */}
           <div className="px-5 pt-4 pb-5 border-t border-border/60">
             <div className="flex items-start justify-between gap-3">
-              <h3 className="font-serif text-base font-semibold line-clamp-1 text-foreground group-hover:text-accent transition-colors">
+              <h3 className="text-sm font-semibold line-clamp-1 text-foreground group-hover:text-accent transition-colors">
                 {book.title}
               </h3>
               <div className="flex items-baseline gap-1.5 shrink-0">
-                <span className="font-sans text-base font-semibold text-accent">
+                <span className="text-sm font-semibold text-accent">
                   ${book.price.toFixed(2)}
                 </span>
               </div>
