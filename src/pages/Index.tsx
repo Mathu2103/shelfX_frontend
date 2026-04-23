@@ -16,52 +16,50 @@ const Index = () => {
 
   return (
     <Layout>
-      {/* Hero Section - light, balanced, editorial */}
-      <section className="relative bg-muted/30 overflow-hidden">
-        <div className="container py-20 md:py-28">
+      {/* Hero Section - simple, balanced */}
+      <section className="bg-muted/30">
+        <div className="container py-16 md:py-20">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left - copy */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.6 }}
               className="max-w-xl"
             >
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 text-accent rounded-full text-xs font-medium tracking-wide">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              <span className="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-medium">
                 New Collection Available
               </span>
-              <h1 className="mt-6 font-serif text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground leading-[1.05] tracking-tight">
-                Discover Your Next
-                <span className="block text-accent italic font-normal">Literary Adventure</span>
+              <h1 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground tracking-tight">
+                Discover Your Next Literary Adventure
               </h1>
-              <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed">
+              <p className="mt-4 text-sm md:text-base text-muted-foreground max-w-lg">
                 Explore thousands of books across every genre. From timeless classics to the latest bestsellers, your next favorite read awaits.
               </p>
 
-              {/* Search field - reference-style inline */}
+              {/* Search field */}
               <form
                 onSubmit={(e) => e.preventDefault()}
-                className="mt-8 flex items-center gap-2 p-1.5 bg-card border border-border/60 rounded-full shadow-card max-w-md"
+                className="mt-6 flex items-center gap-2 p-1.5 bg-card border border-border/60 rounded-full max-w-md"
               >
                 <div className="relative flex-1">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="search"
                     placeholder="Search by title, author, ISBN..."
-                    className="pl-10 border-0 bg-transparent focus-visible:ring-0 shadow-none h-10"
+                    className="pl-10 border-0 bg-transparent focus-visible:ring-0 shadow-none h-9 text-sm"
                   />
                 </div>
-                <Button className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6 h-10">
+                <Button className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-5 h-9 text-sm">
                   Search
                 </Button>
               </form>
 
-              <div className="flex flex-wrap items-center gap-6 mt-8 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-6 mt-6 text-sm text-muted-foreground">
                 <Link to="/books" className="inline-flex items-center gap-1.5 font-medium text-foreground hover:text-accent transition-colors">
                   Browse Collection <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link to="/books?sort=new" className="inline-flex items-center gap-1.5 hover:text-accent transition-colors">
+                <Link to="/books?sort=new" className="hover:text-accent transition-colors">
                   New Arrivals
                 </Link>
               </div>
@@ -70,49 +68,34 @@ const Index = () => {
             {/* Right - featured book */}
             {featuredBook && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative flex justify-center lg:justify-end"
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className="flex justify-center lg:justify-end"
               >
-                <div className="relative">
-                  <div className="absolute -top-6 -right-6 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
-                  <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-accent/5 rounded-full blur-3xl" />
-
-                  <div className="relative grid grid-cols-3 gap-3 items-end">
-                    {/* Side stack - left */}
-                    {trendingBooks[1] && (
-                      <div className="aspect-[2/3] rounded-md overflow-hidden shadow-book-hover -mr-4 mb-8 opacity-70 hover:opacity-100 transition-opacity">
-                        <img src={trendingBooks[1].cover} alt={trendingBooks[1].title} className="w-full h-full object-cover" />
-                      </div>
-                    )}
-                    {/* Featured center */}
-                    <div className="col-span-1 relative z-10 -mt-4">
-                      <div className="aspect-[2/3] rounded-lg overflow-hidden shadow-book-hover bg-card">
-                        <img src={featuredBook.cover} alt={featuredBook.title} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="mt-4 text-center">
-                        <h3 className="font-serif text-lg font-semibold">{featuredBook.title}</h3>
-                        <p className="text-sm text-muted-foreground">{featuredAuthor?.name}</p>
-                      </div>
+                <div className="grid grid-cols-3 gap-3 items-end max-w-md">
+                  {trendingBooks[1] && (
+                    <div className="aspect-[2/3] rounded-md overflow-hidden shadow-book mb-6">
+                      <img src={trendingBooks[1].cover} alt={trendingBooks[1].title} className="w-full h-full object-cover" />
                     </div>
-                    {/* Side stack - right */}
-                    {trendingBooks[2] && (
-                      <div className="aspect-[2/3] rounded-md overflow-hidden shadow-book-hover -ml-4 mb-8 opacity-70 hover:opacity-100 transition-opacity">
-                        <img src={trendingBooks[2].cover} alt={trendingBooks[2].title} className="w-full h-full object-cover" />
-                      </div>
-                    )}
+                  )}
+                  <div className="col-span-1">
+                    <div className="aspect-[2/3] rounded-md overflow-hidden shadow-book-hover bg-card">
+                      <img src={featuredBook.cover} alt={featuredBook.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="mt-3 text-center">
+                      <h3 className="text-sm font-semibold">{featuredBook.title}</h3>
+                      <p className="text-xs text-muted-foreground">{featuredAuthor?.name}</p>
+                    </div>
                   </div>
+                  {trendingBooks[2] && (
+                    <div className="aspect-[2/3] rounded-md overflow-hidden shadow-book mb-6">
+                      <img src={trendingBooks[2].cover} alt={trendingBooks[2].title} className="w-full h-full object-cover" />
+                    </div>
+                  )}
                 </div>
               </motion.div>
             )}
-          </div>
-        </div>
-
-        {/* Subtle scroll indicator */}
-        <div className="flex justify-center pb-6">
-          <div className="h-8 w-8 rounded-full border border-border/60 bg-card/80 flex items-center justify-center text-muted-foreground">
-            <ArrowRight className="h-4 w-4 rotate-90" />
           </div>
         </div>
       </section>
