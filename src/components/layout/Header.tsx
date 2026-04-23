@@ -36,7 +36,7 @@ const Header = () => {
             alt="shelfX Logo"
             className="h-10 w-auto transition-transform group-hover:scale-105"
           />
-          <span className="font-serif text-xl font-semibold text-foreground tracking-tight">
+          <span className="text-lg font-semibold text-foreground tracking-tight">
             shelfX
           </span>
         </Link>
@@ -136,7 +136,7 @@ const Header = () => {
                   <Link to="/login" className="px-4 py-2 hover:bg-muted rounded-md text-sm">Sign In</Link>
                 </nav>
                 <div className="border-t border-border/60 pt-4">
-                  <h3 className="font-serif text-base mb-2 px-4">Categories</h3>
+                  <h3 className="text-sm font-semibold mb-2 px-4">Categories</h3>
                   {categories.map((cat) => (
                     <Link
                       key={cat.id}

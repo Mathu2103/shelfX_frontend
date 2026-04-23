@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link to="/" className="flex items-center gap-2">
               <img src={logo} alt="shelfX Logo" className="h-10 w-auto" />
-              <span className="font-serif text-xl font-semibold text-foreground">shelfX</span>
+              <span className="text-lg font-semibold text-foreground">shelfX</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               Your destination for literary adventures. Discover, explore, and find your next favorite read.
