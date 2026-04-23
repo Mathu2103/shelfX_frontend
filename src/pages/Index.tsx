@@ -150,59 +150,55 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Find Your Favorite Books - editorial split */}
-      <section className="py-20 md:py-24 bg-muted/30">
+      {/* Find Your Favorite Books */}
+      <section className="py-16 md:py-20 bg-muted/30">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left - book covers grid */}
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="grid grid-cols-2 gap-4 max-w-md"
             >
-              {bestSellers.slice(0, 4).map((book, i) => (
+              {bestSellers.slice(0, 4).map((book) => (
                 <div
                   key={book.id}
-                  className="aspect-[2/3] rounded-lg overflow-hidden shadow-book hover:shadow-book-hover transition-shadow"
-                  style={{ transform: `translateY(${i % 2 === 0 ? "0" : "1.5rem"})` }}
+                  className="aspect-[2/3] rounded-md overflow-hidden shadow-book hover:shadow-book-hover transition-shadow"
                 >
                   <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
                 </div>
               ))}
             </motion.div>
 
-            {/* Right - copy + stats */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-serif text-3xl md:text-5xl font-semibold leading-tight">
-                Find Your Favorite
-                <span className="block">Books Here</span>
+              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                Find Your Favorite Books Here
               </h2>
-              <p className="mt-5 text-muted-foreground max-w-md leading-relaxed">
+              <p className="mt-4 text-sm md:text-base text-muted-foreground max-w-md">
                 We regularly publish a fascinating feature about a huge variety of bookish subjects, publishers, and interesting characters in literature and notable new releases.
               </p>
 
-              <div className="grid grid-cols-3 gap-6 mt-10 max-w-md">
+              <div className="grid grid-cols-3 gap-6 mt-8 max-w-md">
                 <div>
-                  <div className="font-serif text-3xl md:text-4xl font-semibold text-foreground">{books.length}+</div>
-                  <div className="mt-1 text-xs text-muted-foreground uppercase tracking-wider">Books</div>
+                  <div className="text-2xl md:text-3xl font-semibold text-foreground">{books.length}+</div>
+                  <div className="mt-1 text-xs text-muted-foreground">Books</div>
                 </div>
                 <div>
-                  <div className="font-serif text-3xl md:text-4xl font-semibold text-foreground">{bestSellers.length * 10}+</div>
-                  <div className="mt-1 text-xs text-muted-foreground uppercase tracking-wider">Best Sellers</div>
+                  <div className="text-2xl md:text-3xl font-semibold text-foreground">{bestSellers.length * 10}+</div>
+                  <div className="mt-1 text-xs text-muted-foreground">Best Sellers</div>
                 </div>
                 <div>
-                  <div className="font-serif text-3xl md:text-4xl font-semibold text-foreground">{newArrivals.length * 5}+</div>
-                  <div className="mt-1 text-xs text-muted-foreground uppercase tracking-wider">New Arrivals</div>
+                  <div className="text-2xl md:text-3xl font-semibold text-foreground">{newArrivals.length * 5}+</div>
+                  <div className="mt-1 text-xs text-muted-foreground">New Arrivals</div>
                 </div>
               </div>
 
               <Link to="/books">
-                <Button className="mt-10 bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-8 h-11">
+                <Button className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6 h-10">
                   Learn More
                 </Button>
               </Link>
@@ -212,30 +208,29 @@ const Index = () => {
       </section>
 
       {/* Categories */}
-      <section className="py-20 md:py-24">
+      <section className="py-16 md:py-20">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold">Browse by Category</h2>
-            <p className="mt-3 text-muted-foreground">Find your perfect read in any genre</p>
-            <div className="mt-5 mx-auto h-px w-12 bg-accent/60" />
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Browse by Category</h2>
+            <p className="mt-3 text-sm text-muted-foreground">Find your perfect read in any genre</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {categories.slice(0, 8).map((category, i) => (
               <motion.div
                 key={category.id}
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.04 }}
+                transition={{ delay: i * 0.03 }}
               >
                 <Link
                   to={`/books?category=${category.slug}`}
-                  className="block p-6 rounded-xl bg-card border border-border/60 hover:border-accent hover:shadow-book transition-all duration-300 text-center group"
+                  className="block p-5 rounded-lg bg-card border border-border/60 hover:border-accent hover:shadow-book transition-all duration-300 text-center group"
                 >
-                  <h3 className="font-serif text-lg font-semibold text-foreground group-hover:text-accent transition-colors">
+                  <h3 className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors">
                     {category.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-1.5 line-clamp-2">{category.description}</p>
+                  <p className="text-xs text-muted-foreground mt-1.5 line-clamp-2">{category.description}</p>
                 </Link>
               </motion.div>
             ))}
