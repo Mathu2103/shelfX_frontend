@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "@fontsource/playfair-display/400.css";
-@import "@fontsource/playfair-display/500.css";
-@import "@fontsource/playfair-display/600.css";
-@import "@fontsource/playfair-display/700.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
 
 /* Bookshire Design System - Minimal, Premium, Editorial Bookstore */
 
@@ -133,11 +130,11 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-tight;
+    @apply font-sans tracking-tight font-semibold;
   }
 
-  h1 { @apply leading-[1.1]; }
-  h2 { @apply leading-[1.15]; }
+  h1 { @apply leading-[1.15]; }
+  h2 { @apply leading-[1.2]; }
 
   p { @apply leading-relaxed; }
 }
