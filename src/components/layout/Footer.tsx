@@ -11,9 +11,9 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-16">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <img src={logo} alt="shelfX Logo" className="h-10 w-auto" />
-              <span className="text-lg font-semibold text-foreground">shelfX</span>
+            <Link to="/" className="flex items-center gap-3">
+              <img src={logo} alt="shelfX Logo" className="h-12 w-auto" />
+              <span className="text-xl font-serif font-medium text-foreground tracking-wide">shelfX</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               Your destination for literary adventures. Discover, explore, and find your next favorite read.

@@ -30,13 +30,13 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="container flex h-20 items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group shrink-0">
+        <Link to="/" className="flex items-center gap-3 group shrink-0">
           <img
             src={logo}
             alt="shelfX Logo"
-            className="h-10 w-auto transition-transform group-hover:scale-105"
+            className="h-14 w-auto transition-transform group-hover:scale-105"
           />
-          <span className="text-lg font-semibold text-foreground tracking-tight">
+          <span className="text-2xl font-serif font-medium text-foreground tracking-wide">
             shelfX
           </span>
         </Link>
